@@ -4,7 +4,7 @@ import requests
 
 
 def web_parse(class_num, dept_name):
-    dept_link, div, class_num_int = '', '', 0
+    dept_link, div = '', ''
     class_num_str = str(class_num)
 
     if dept_name == 'cse':
