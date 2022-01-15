@@ -12,7 +12,7 @@
     picking classes.
 '''
 
-import slugplanningdb as sdb
+# import slugplanningdb as sdb
 
 # User info
 currentQuarter = ''
@@ -62,25 +62,36 @@ currentDiff = currentDiff.lower()
 print('Your current difficulty is set to:', currentDiff)
 
 # Asking students what classes they have taken
-print('What classes have you taken?: ')
-tmpString == 'y'
-while tmpString == 'y':
-    print('These are your current taken courses: ')
-    print(*classTakenList)
 
-    classes = input('What class have you taken? If no more classes enter n: ')
-    if not(classes == 'n'):
-        classTakenList.append(classes)
-    else:
-        tmpString = 'n'
+tmpString = input('would you like to enter your data manually? y or n: ')
+if tmpString == 'y':
 
-    classTakenList = [classTakenList.lower() for classTakenList in classTakenList]
+    print('What classes have you taken?: ')
+    tmpString == 'y'
+    while tmpString == 'y':
+        print('These are your current taken courses: ')
+        print(*classTakenList)
 
-for i in sdb.CLASSES.keys():
+        classes = input('What class have you taken? If no more classes enter n: ')
+        if not(classes == 'n'):
+            classTakenList.append(classes)
+        else:
+            tmpString = 'n'
 
-    if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
-        canTakeClasses.append(i)
+        classTakenList = [classTakenList.lower() for classTakenList in classTakenList]
 
+    for i in sdb.CLASSES.keys():
+
+        if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
+            canTakeClasses.append(i)
+
+if tmpString == 'n':
+    with open('classes.txt') as f:
+        classTakenList = f.read().splitlines()
+
+
+
+print('classes that you have take: ', classTakenList)
 
 print('classes you can take: ', *canTakeClasses)
 

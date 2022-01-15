@@ -48,7 +48,7 @@ CLASSES = {
     "cse30": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse20", "math19a"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -64,7 +64,7 @@ CLASSES = {
     "cse12": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse20"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -80,7 +80,7 @@ CLASSES = {
     "cse16": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["math19a"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -96,7 +96,7 @@ CLASSES = {
     "math19a": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": [],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -112,7 +112,7 @@ CLASSES = {
     "math19b": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["math19a"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -128,7 +128,7 @@ CLASSES = {
     "math23a": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["math19b"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -144,7 +144,7 @@ CLASSES = {
     "math21": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["math19a"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -160,7 +160,7 @@ CLASSES = {
     "cse13": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse12"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -176,7 +176,7 @@ CLASSES = {
     "cse101": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse13", "cse16", "cse30", "math19b"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -192,7 +192,7 @@ CLASSES = {
     "cse102": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse102"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -208,7 +208,7 @@ CLASSES = {
     "cse103": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse103"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -224,7 +224,7 @@ CLASSES = {
     "cse120": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse12", "cse13", "cse16"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -240,7 +240,7 @@ CLASSES = {
     "cse130": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse12", "cse101", "cse15"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -256,7 +256,7 @@ CLASSES = {
     "cse107": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse16", "math23a"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -272,7 +272,7 @@ CLASSES = {
     "cse112": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": ["cse101"],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -288,7 +288,7 @@ CLASSES = {
     "core": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": [],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
@@ -304,7 +304,7 @@ CLASSES = {
     "ge": {
         "cc": web_parse(30)[0],
         "availability": 7,
-        "prereqs": ["cse20", "math19A"],
+        "prereqs": [],
         "gen_descrip": web_parse(30)[1],
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
