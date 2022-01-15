@@ -1,1 +1,1 @@
-# AcademicPlanner
+# Slug Planning
