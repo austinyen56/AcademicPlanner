@@ -56,7 +56,7 @@ print("Welcome to the UCSC Academic Planner!")
 tmpString = 'n'
 while tmpString == 'n':
     currentQuarter = input('What is your current quarter?: ')
-    currentQuarter = currentQuarter.lower()
+    currentQuarter = currentQuarter
     print('Your current quarter is: ', currentQuarter)
     print('Is this correct?: ')
 
@@ -92,7 +92,7 @@ if tmpString == 'y':
     for i in sdb.CLASSES.keys():
 
         if (sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList)):
-            if currentQuarter in sdb.CLASSES.get("quarter_offered"):
+            if currentQuarter in sdb.CLASSES.get(i).get("quarter_offered"):
                 canTakeClasses.append(i)
 
 # from txt file classes and appending to the canTakeClasses
@@ -104,7 +104,7 @@ if tmpString == 'n':
     for i in sdb.CLASSES.keys():
 
         if (sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList)):
-            if currentQuarter in sdb.CLASSES.get("quarter_offered"):
+            if currentQuarter in sdb.CLASSES.get(i).get("quarter_offered"):
                 canTakeClasses.append(i)
 
 print('classes that you have take: ', *classTakenList)
