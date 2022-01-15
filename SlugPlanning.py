@@ -11,8 +11,14 @@
     aiming to help decrease the stress levels of students at University when
     picking classes.
 '''
-print("hu")
+print('loading...')
+
 import slugplanningdb as sdb
+import copy
+import os
+
+os.system('clear')
+print('Finished loading!')
 
 # User info
 currentQuarter = ''
@@ -27,7 +33,7 @@ tmpString = ''
 tmpInt = 0
 tmpBool = True
 
-
+# l2 is subset of l1
 def sub_set(l1, l2):
     tmp = l2[:]
     for i in l1:
@@ -90,8 +96,22 @@ if tmpString == 'n':
         classTakenList = f.read().splitlines()
 
 
+    for i in sdb.CLASSES.keys():
 
-print('classes that you have take: ', classTakenList)
+        if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
+            canTakeClasses.append(i)
+
+print('classes that you have take: ', *classTakenList)
+
+tmpA = classTakenList
+tmpB = canTakeClasses
+
+tmpC = []
+
+for elem in copy.deepcopy(tmpA):
+    if elem in tmpB:
+        tmpA.pop(tmpA.index(elem))
+        tmpC.append(tmpB.pop(tmpB.index(elem)))
 
 print('classes you can take: ', *canTakeClasses)
 
