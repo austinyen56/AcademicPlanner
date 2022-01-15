@@ -115,6 +115,7 @@ for elem in copy.deepcopy(tmpA):
 
 print('classes you can take: ', *canTakeClasses)
 
+print('Test new line')
 
 
 
