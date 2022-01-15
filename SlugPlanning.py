@@ -16,6 +16,7 @@ print('loading...')
 import slugplanningdb as sdb
 import copy
 import os
+from itertools import combinations
 
 os.system('clear')
 print('Finished loading!')
@@ -70,6 +71,7 @@ print('Your current difficulty is set to:', currentDiff)
 # Asking students what classes they have taken
 
 tmpString = input('would you like to enter your data manually? y or n: ')
+# Taking classes manually and appending to the canTakeClasses
 if tmpString == 'y':
 
     print('What classes have you taken?: ')
@@ -86,22 +88,32 @@ if tmpString == 'y':
 
         classTakenList = [classTakenList.lower() for classTakenList in classTakenList]
 
+    # appending classes to can take classes
     for i in sdb.CLASSES.keys():
 
-        if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
-            canTakeClasses.append(i)
+        if (sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList)):
+            if currentQuarter in sdb.CLASSES.get("quarter_offered"):
+                canTakeClasses.append(i)
 
+# from txt file classes and appending to the canTakeClasses
 if tmpString == 'n':
     with open('classes.txt') as f:
         classTakenList = f.read().splitlines()
 
-
+    # appending classes to can take classes
     for i in sdb.CLASSES.keys():
 
-        if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
-            canTakeClasses.append(i)
+        if (sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList)):
+            if currentQuarter in sdb.CLASSES.get("quarter_offered"):
+                canTakeClasses.append(i)
 
 print('classes that you have take: ', *classTakenList)
+
+
+# generating combinations of the classes that you can take
+classTaken = []
+for i in classTakenList:
+    classTaken.append(i)
 
 tmpA = classTakenList
 tmpB = canTakeClasses
@@ -115,7 +127,49 @@ for elem in copy.deepcopy(tmpA):
 
 print('classes you can take: ', *canTakeClasses)
 
+numClass = int(input('choose the amount of classes you want to take: '))
 
+count = 0
+possibleClasses = []
+
+
+
+print('\nyour possible options: ')
+for i in combinations(canTakeClasses, numClass):
+    print(count, '. ', i)
+
+    tmpDiff = []
+
+    # printing out all the class options
+    print('The difficulty of these classes: ', end='')
+    for j in i:
+        diff = sdb.CLASSES.get(j).get('difficulty')
+        print(diff, ', ', end='')
+        tmpDiff.append(diff)
+
+    diffAvg = sum(tmpDiff)/len(tmpDiff)
+    print('\nThe average difficulty is: {:.2f}'.format(diffAvg))
+
+    possibleClasses.append(i)
+    count += 1
+
+# generated list of your preffered schedule
+tmpInt = int(input('\nChoose by number your preffered schedule: '))
+plan = possibleClasses[tmpInt]
+
+os.system('clear')
+
+# entering command line
+while True:
+    print('Your planned classes: ', plan)
+
+    user = input('Type commands: ')
+
+    if user == 'help':
+        print('-- exit: quits program')
+        print('-- help: displays commands')
+    if user == 'exit':
+        break
 
 
 
