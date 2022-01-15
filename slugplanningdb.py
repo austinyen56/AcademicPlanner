@@ -4,25 +4,29 @@ import requests
 
 
 def web_parse(class_num, dept_name):
-    dept_link, div = '', ''
+    dept_link, div, class_num_int = '', '', 0
+    class_num_str = str(class_num)
+
     if dept_name == 'cse':
         dept_link = "CSE-Computer-Science-and-Engineering/"
         if type(class_num) == str:
-            if int(''.join(filter(str.isdigit, class_num))) < 100:
-                div = "Lower-Division/CSE-"
-            else:
-                div = "Upper-Division/CSE-"
+            class_num = int(''.join(filter(str.isdigit, class_num)))
+        if class_num < 100:
+            div = "Lower-Division/CSE-"
+        else:
+            div = "Upper-Division/CSE-"
 
     if dept_name == 'math':
         dept_link = "MATH-Mathematics/"
         if type(class_num) == str:
-            if int(''.join(filter(str.isdigit, class_num))) < 100:
-                div = "Lower-Division/MATH-"
-            else:
-                div = "Upper-Division/MATH-"
+            class_num = int(''.join(filter(str.isdigit, class_num)))
+        if class_num < 100:
+            div = "Lower-Division/MATH-"
+        else:
+            div = "Upper-Division/MATH-"
 
-    class_num_str = str(class_num)
-    url = "https://catalog.ucsc.edu/en/2020-2021/General-Catalog/Courses/" + dept_link + div + class_num_str
+    url = "https://catalog.ucsc.edu/en/Current/General-Catalog/Courses/" + dept_link + div + class_num_str
+    print(url)
     request_result = requests.get(url)
     request_result.raise_for_status()
     html = BeautifulSoup(request_result.text, 'html.parser')
@@ -166,8 +170,8 @@ CLASSES = {
         "ge_satis": [""],
         "pref_prof": ["Larrabee"],
     },
-    "cse13": {
-        "cc": web_parse(13, 'cse')[0],
+    "cse13s": {
+        "cc": web_parse("13s", 'cse')[0],
         "availability": 5,
         "prereqs": ["cse12"],
         "gen_descrip": web_parse(30, 'cse')[1],
@@ -185,7 +189,7 @@ CLASSES = {
     "cse101": {
         "cc": web_parse(101, 'cse')[0],
         "availability": 4,
-        "prereqs": ["cse13", "cse16", "cse30", "math19b"],
+        "prereqs": ["cse13s", "cse16", "cse30", "math19b"],
         "gen_descrip": web_parse(101, 'cse')[1],
         "difficulty": 6,
         "quarter_offered": web_parse(101, 'cse')[2],
@@ -233,7 +237,7 @@ CLASSES = {
     "cse120": {
         "cc": web_parse(120, 'cse')[0],
         "availability": 7,
-        "prereqs": ["cse12", "cse13", "cse16"],
+        "prereqs": ["cse12", "cse13s", "cse16"],
         "gen_descrip": web_parse(120, 'cse')[1],
         "difficulty": 4,
         "quarter_offered": web_parse(120, 'cse')[2],
@@ -333,3 +337,4 @@ CLASSES = {
 
 
 # Parse GEs from GE list to get the type of GE it contains
+# Currently unable to directly imply satisfied courses (ex: Took cse 101 -> satisify all prereqs)
