@@ -11,8 +11,8 @@
     aiming to help decrease the stress levels of students at University when
     picking classes.
 '''
-
-# import slugplanningdb as sdb
+print("hu")
+import slugplanningdb as sdb
 
 # User info
 currentQuarter = ''
