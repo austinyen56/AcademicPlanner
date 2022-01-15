@@ -39,7 +39,7 @@ def web_parse(class_num, dept_name):
     # prereq = str(html.find_all("p")[2]).replace("</p>", "").replace("<p>", "").replace("Prerequisite(s): ", "")
 
     return cc, gen_descrip, quarter_offered
-
+#print(web_parse(20, 'cse'))
 
 CLASSES = {
     "cse20": {
@@ -320,7 +320,7 @@ CLASSES = {
         "prereqs": [],
         "gen_descrip": "GE Description Varies",
         "difficulty": 3,
-        "quarter_offered": ['Varies'],
+        "quarter_offered": ['Spring', 'Summer', 'Fall', 'Winter'],
         "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}],
         "textbook": "textbook_url",
         "haslab": False,
@@ -336,5 +336,12 @@ CLASSES = {
 # print(CLASSES.keys())
 
 
+
+
+
+
+
 # Parse GEs from GE list to get the type of GE it contains
 # Currently unable to directly imply satisfied courses (ex: Took cse 101 -> satisify all prereqs)
+#Not accounting current quarter avilibility
+# make code recursive
