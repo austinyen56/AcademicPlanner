@@ -1,0 +1,6 @@
+cse20
+cse13
+cse101
+cse102
+math19a
+math19b
