@@ -1,3 +1,6 @@
+
+
+
 from bs4 import BeautifulSoup
 import requests
 import bleach
@@ -46,7 +49,7 @@ CLASSES = {
     "cse30": {
         "cc": 30,
         "availability": 7,
-        "prereqs": [],
+        "prereqs": ["cse20"],
         "difficulty": 4,
         "quarter_offered": ["spring", "summer", "fall", "winter"],
         "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}],
