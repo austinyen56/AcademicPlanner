@@ -1,6 +1,11 @@
 cse20
-cse13
+cse30
+cse13s
+cse12
 cse101
 cse102
+cse103
 math19a
 math19b
+math23a
+
