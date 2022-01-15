@@ -48,12 +48,8 @@ CLASSES = {
     "cse30": {
         "cc": web_parse(30)[0],
         "availability": 7,
-<<<<<<< HEAD
         "prereqs": ["cse20", "math19A"],
         "gen_descrip": web_parse(30)[1],
-=======
-        "prereqs": ["cse20"],
->>>>>>> e629bdf2e7be1ed74f45849b9fcbf2722ffc0816
         "difficulty": 4,
         "quarter_offered": web_parse(30)[2],
         "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}],
