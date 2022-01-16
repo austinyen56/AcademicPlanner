@@ -1,12 +1,14 @@
-
 from bs4 import BeautifulSoup
 import requests
+from colorama import Fore, Back, Style
 
 
+# Parsing data from the UCSC catalog
 def web_parse(class_num, dept_name):
     dept_link, div = '', ''
     class_num_str = str(class_num)
 
+    # Currently considering only CSE and MATH, may add more in the future
     if dept_name == 'cse':
         dept_link = "CSE-Computer-Science-and-Engineering/"
         if type(class_num) == str:
@@ -26,11 +28,11 @@ def web_parse(class_num, dept_name):
             div = "Upper-Division/MATH-"
 
     url = "https://catalog.ucsc.edu/en/Current/General-Catalog/Courses/" + dept_link + div + class_num_str
-    print(url)
+    print(f"{Fore.LIGHTYELLOW_EX}[GET]{Style.RESET_ALL}", url)
     request_result = requests.get(url)
     request_result.raise_for_status()
     html = BeautifulSoup(request_result.text, 'html.parser')
-    for a in html.find_all('a'):        # Removing hyperlinks in text
+    for a in html.find_all('a'):  # Removing hyperlinks in text
         a.replaceWithChildren()
 
     cc = str(html.find_all("span")[5].string).replace("CSE ", '')
@@ -38,13 +40,16 @@ def web_parse(class_num, dept_name):
     quarter_offered = str(html.find_all("p")[4].string).split(", ")
     # prereq = str(html.find_all("p")[2]).replace("</p>", "").replace("<p>", "").replace("Prerequisite(s): ", "")
 
-    return cc, gen_descrip, quarter_offered
-#print(web_parse(20, 'cse'))
+    return cc, gen_descrip, quarter_offered  # Returns course code, general description, and the quarters offered
+
+
+# print(web_parse(20, 'cse'))
 
 CLASSES = {
     "cse20": {
         "cc": web_parse(20, 'cse')[0],  # Class code (20)
-        "availability": 4,        # 1 = never available, 2 = sometimes available, 3 = meh, 4 = often available, 5 = always available
+        "availability": 4,
+        # 1 = never available, 2 = sometimes available, 3 = meh, 4 = often available, 5 = always available
         "prereqs": [],
         "gen_descrip": web_parse(20, 'cse')[1],
         "difficulty": 4,
@@ -56,7 +61,7 @@ CLASSES = {
         "class_type": 1,  # Math is 0, programming is 1, other is 2
         "time_commit": 2,  # 1= slack, 2= some work, 3= extra work
         "ge_satis": ["mf"],
-        "pref_prof": ["Larrabee"],      # Based on rate my prof, can't predict "staff" tho
+        "pref_prof": ["Larrabee"],  # Based on rate my prof, can't predict "staff" tho
     },
     "cse30": {
         "cc": web_parse(30, 'cse')[0],
@@ -113,7 +118,7 @@ CLASSES = {
         "gen_descrip": web_parse("19a", 'math')[1],
         "difficulty": 5,
         "quarter_offered": web_parse("19a", 'math')[2],
-        "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}], # Not sure need edit
+        "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}],  # Not sure need edit
         "textbook": "textbook_url",
         "haslab": False,
         "ta_helpful": 6,
@@ -145,7 +150,7 @@ CLASSES = {
         "gen_descrip": web_parse("23a", 'math')[1],
         "difficulty": 5,
         "quarter_offered": web_parse("23a", 'math')[2],
-        "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}], # Not sure need edit
+        "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}],  # Not sure need edit
         "textbook": "textbook_url",
         "haslab": False,
         "ta_helpful": 6,
@@ -161,7 +166,7 @@ CLASSES = {
         "gen_descrip": web_parse(21, 'math')[1],
         "difficulty": 4,
         "quarter_offered": web_parse(21, 'math')[2],
-        "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}], # Not sure need edit
+        "syllabus": [{"quiz": 30}, {"midterm": 30}, {"final": 30}],  # Not sure need edit
         "textbook": "textbook_url",
         "haslab": False,
         "ta_helpful": 6,
@@ -336,12 +341,7 @@ CLASSES = {
 # print(CLASSES.keys())
 
 
-
-
-
-
-
-# Parse GEs from GE list to get the type of GE it contains
 # Currently unable to directly imply satisfied courses (ex: Took cse 101 -> satisify all prereqs)
-#Not accounting current quarter avilibility
 # make code recursive
+# Does not consider unsatisfied post reqs (ex: its impossible to take 101 next quarter if you didnt
+# Include other minors and majors if the user wants to take it
