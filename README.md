@@ -40,4 +40,4 @@ includes:
 * Having the ability to store individual user data through an actual database
 
 
-![slug] 
+![slug](https://github.com/austinyen56/Slug-Planning/blob/main/banane%20slug.png)
