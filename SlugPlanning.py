@@ -45,6 +45,22 @@ def sub_set(l1, l2):
                 return False
     return True
 
+def geReq():
+    ge_req = ['cc', 'er', 'im', 'mf', 'si', 'sr', 'ta', 'pee', 'pre', 'c', 'dc']
+
+    with open('classes.txt') as f:
+        classTakenList = f.read().splitlines()
+
+    ge_taken = []
+    for i in sdb.CLASSES.keys():
+        ge_taken.append(sdb.CLASSES.get(i).get("ge_satis"))
+    ge_taken_parsed = [j for i in ge_taken for j in i]
+
+    ge_needed = [x for x in ge_req if x not in ge_taken_parsed]
+    if not ge_needed:
+        print('You satisfied all GEs')
+    else:
+        print('GE categories needed: ', ge_needed)
 
 # greetings and main function
 
@@ -68,44 +84,17 @@ currentDiff = input('type, E, M, H: ')
 currentDiff = currentDiff.lower()
 print('Your current difficulty is set to:', currentDiff)
 
-# Asking students what classes they have taken
-
-tmpString = input('would you like to enter your data manually? y or n: ')
-# Taking classes manually and appending to the canTakeClasses
-if tmpString == 'y':
-
-    print('What classes have you taken?: ')
-    tmpString == 'y'
-    while tmpString == 'y':
-        print('These are your current taken courses: ')
-        print(*classTakenList)
-
-        classes = input('What class have you taken? If no more classes enter n: ')
-        if not(classes == 'n'):
-            classTakenList.append(classes)
-        else:
-            tmpString = 'n'
-
-        classTakenList = [classTakenList.lower() for classTakenList in classTakenList]
-
-    # appending classes to can take classes
-    for i in sdb.CLASSES.keys():
-
-        if (sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList)):
-            if currentQuarter in sdb.CLASSES.get(i).get("quarter_offered"):
-                canTakeClasses.append(i)
-
 # from txt file classes and appending to the canTakeClasses
-if tmpString == 'n':
-    with open('classes.txt') as f:
-        classTakenList = f.read().splitlines()
+print('accessing text file... ')
+with open('classes.txt') as f:
+    classTakenList = f.read().splitlines()
 
-    # appending classes to can take classes
-    for i in sdb.CLASSES.keys():
+# appending classes to can take classes
+for i in sdb.CLASSES.keys():
 
-        if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
-            if currentQuarter in sdb.CLASSES.get(i).get("quarter_offered"):
-                canTakeClasses.append(i)
+    if sub_set(sdb.CLASSES.get(i).get("prereqs"), classTakenList):
+        if currentQuarter in sdb.CLASSES.get(i).get("quarter_offered"):
+            canTakeClasses.append(i)
 
 print('classes that you have take: ', *classTakenList)
 
@@ -127,6 +116,8 @@ for elem in copy.deepcopy(tmpA):
 
 print('classes you can take: ', *canTakeClasses)
 
+# shows what GEs you still need
+geReq()
 
 numClass = int(input('choose the amount of classes you want to take: '))
 
@@ -160,13 +151,60 @@ plan = possibleClasses[tmpInt]
 
 os.system('clear')
 
+# all the stats
+def stats(cl, inpu):
+    return sdb.CLASSES.get(cl).get(inpu)
+
+
+
 # entering command line
 while True:
     print('Your planned classes: ', plan)
 
     user = input('Type commands: ')
 
+    if user == 'stats':
+        os.system('clear')
+
+        print('Stats of classes: ')
+
+
+       # flipboard for planned classes
+
+        bo = True
+        i = 0
+
+        while bo:
+
+            print(plan[i])
+            print('Can you get this class rating: ', stats(plan[i], 'availability'))
+            print('General discription of this class: ', stats(plan[i], 'gen_descrip'))
+            print('The difficulty of this class is: ', stats(plan[i], 'difficulty'))
+            print('The syllabus of the class: ', stats(plan[i], 'syllabus'))
+            print('The textbook of the class: ', stats(plan[i], 'textbook'))
+            print('Does this class have a lab?: ', stats(plan[i], 'haslab'))
+            print('Are the TAs helpful rating?: ', stats(plan[i], 'ta_helpful'))
+            print('What is this class focusing on? 0:math, 1:coding, 2:other', stats(plan[i], 'class_type'))
+            print('The time commitment rating out of three: ', stats(plan[i], 'time_commit'))
+            print('Most people preffer: ', stats(plan[i], 'pref_prof'))
+
+            op = input('press k to go next, j to go back: ')
+
+            if op == 'k':
+                i += 1
+            if op == 'j':
+                i -= 1
+            if i >= len(plan):
+                i = i % len(plan)
+            if not(op == 'j') and not(op == 'k'):
+                bo = False
+
+            os.system('clear')
+
+            continue
+
     if user == 'help':
+        print('-- stats: prints all the stats of your planned classes')
         print('-- exit: quits program')
         print('-- help: displays commands')
     if user == 'exit':
