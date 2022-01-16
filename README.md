@@ -17,3 +17,8 @@ operating systems. The program will prompt you to enter some information.
 With the program you have the option to enter a text file in order to further
 streamline your process.
 
+## Improvements
+There are many components that we are looking to improve with this program. This
+including adding an attractive UX/UI. Extending this application to more classes
+and Majors. Being able to retrieve difficulty of classes through online accounts
+and posts and many more to improve and optimize this service.
