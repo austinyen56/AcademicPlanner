@@ -125,7 +125,6 @@ count = 0
 possibleClasses = []
 
 
-
 print('\nyour possible options: ')
 for i in combinations(canTakeClasses, numClass):
     print(count, '. ', i)
@@ -145,6 +144,13 @@ for i in combinations(canTakeClasses, numClass):
     possibleClasses.append(i)
     count += 1
 
+if currentDiff == 'e':
+    print('Your recommended difficulty is: 7-10')
+if currentDiff == 'm':
+    print('Your recommended difficulty is: 4-6')
+if currentDiff == 'h':
+    print('Your recommended difficulty is: 1-3')
+
 # generated list of your preffered schedule
 tmpInt = int(input('\nChoose by number your preffered schedule: '))
 plan = possibleClasses[tmpInt]
@@ -159,15 +165,13 @@ def stats(cl, inpu):
 
 # entering command line
 while True:
+
     print('Your planned classes: ', plan)
 
     user = input('Type commands: ')
 
     if user == 'stats':
         os.system('clear')
-
-        print('Stats of classes: ')
-
 
        # flipboard for planned classes
 
@@ -176,6 +180,9 @@ while True:
 
         while bo:
 
+            print('Stats of classes: ')
+            print('Your planned classes: ', plan)
+            print('class ', i + 1, '/', len(plan))
             print(plan[i])
             print('Can you get this class rating: ', stats(plan[i], 'availability'))
             print('General discription of this class: ', stats(plan[i], 'gen_descrip'))
@@ -194,7 +201,7 @@ while True:
                 i += 1
             if op == 'j':
                 i -= 1
-            if i >= len(plan):
+            if i >= len(plan) or i <= len(plan):
                 i = i % len(plan)
             if not(op == 'j') and not(op == 'k'):
                 bo = False
@@ -203,10 +210,31 @@ while True:
 
             continue
 
+    # gets info to any class
+    if user == 'info':
+        cl = input('Search Class: ')
+        try:
+            print(cl)
+            print('Can you get this class rating: ', stats(cl, 'availability'))
+            print('General discription of this class: ', stats(cl, 'gen_descrip'))
+            print('The difficulty of this class is: ', stats(cl, 'difficulty'))
+            print('The syllabus of the class: ', stats(cl, 'syllabus'))
+            print('The textbook of the class: ', stats(cl, 'textbook'))
+            print('Does this class have a lab?: ', stats(cl, 'haslab'))
+            print('Are the TAs helpful rating?: ', stats(cl, 'ta_helpful'))
+            print('What is this class focusing on? 0:math, 1:coding, 2:other', stats(cl, 'class_type'))
+            print('The time commitment rating out of three: ', stats(cl, 'time_commit'))
+            print('Most people preffer: ', stats(cl, 'pref_prof'))
+        except:
+            print('invalid class... ')
+
     if user == 'help':
         print('-- stats: prints all the stats of your planned classes')
+        print('-- info: gets info of any class')
         print('-- exit: quits program')
         print('-- help: displays commands')
+    if user == 'clear':
+        os.system('clear')
     if user == 'exit':
         break
 
