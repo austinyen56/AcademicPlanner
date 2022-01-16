@@ -85,8 +85,8 @@ def main():
             continue
 
     # Asking student difficulty of classes
-    print('How do you feel about your classes so far?: ')
-    currentDiff = input('Type, E (Easy), M (Medium), H (Hard): ').lower()  # Check invalid response?
+    print('How are you managing your classes so far?: ')
+    currentDiff = input('Type, E (Easy Course Load), M (Medium Course Load), H (Hard Course Load): ').lower()  # Check invalid response?
     print('Your current difficulty is set to:', currentDiff)
 
     # from txt file classes and appending to the canTakeClasses

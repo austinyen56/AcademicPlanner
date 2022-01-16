@@ -342,6 +342,5 @@ CLASSES = {
 
 
 # Currently unable to directly imply satisfied courses (ex: Took cse 101 -> satisify all prereqs)
-# make code recursive
-# Does not consider unsatisfied post reqs (ex: its impossible to take 101 next quarter if you didnt
 # Include other minors and majors if the user wants to take it
+# No database yet to store individual user data
